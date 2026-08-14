@@ -5,12 +5,12 @@ public:
         vector<vector<int>> triplats;
 
         sort(nums.begin(), nums.end());
-
+        int size = nums.size() ;
         int ptr1 = 0;
         int ptr2 = 1;
-        int ptr3 = nums.size() - 1;
+        int ptr3 = size - 1;
 
-        while (ptr1 < nums.size() - 2) {
+        while (ptr1 < size - 2) {
 
             while (ptr2 < ptr3) {
 
@@ -46,13 +46,13 @@ public:
 
             ptr1++;
 
-            while (ptr1 < nums.size() - 2 &&
+            while (ptr1 < size - 2 &&
                    nums[ptr1] == nums[ptr1 - 1]) {
                 ptr1++;
             }
 
             ptr2 = ptr1 + 1;
-            ptr3 = nums.size() - 1;
+            ptr3 = size - 1;
         }
 
         return triplats;
