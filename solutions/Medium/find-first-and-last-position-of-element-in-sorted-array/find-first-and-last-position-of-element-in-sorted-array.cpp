@@ -1,10 +1,7 @@
 class Solution {
 
 public:
-  enum class Direction { left = 0, right = 1 };
-
-  int search(std::vector<int> &nums, int target,
-             Direction d = Direction::left) {
+  int search(std::vector<int> &nums, int target, int d = 0) {
     int i = 0, j = nums.size() - 1;
     int index = -1;
 
@@ -14,7 +11,7 @@ public:
 
       if (nums[mid] == target) {
         index = mid;
-        if (d == Direction::left) {
+        if (d == 0) {
 
           j = mid - 1;
         } else {
@@ -38,8 +35,8 @@ public:
       return {ind, ind};
     }
 
-    int left = search(nums, target, Direction::left);
-    int right = search(nums, target, Direction::right);
+    int left = search(nums, target, 0);
+    int right = search(nums, target, 1);
     return {left, right};
   }
 };
