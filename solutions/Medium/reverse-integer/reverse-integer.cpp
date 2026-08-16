@@ -4,8 +4,8 @@ public:
         
         long long res = 0 ;
         while( x != 0 ){
-            int r = x % 10 ; 
-            res = res * 10 + r ; 
+            
+            res = res * 10  + x % 10 ; 
             x /= 10 ;
         }
 
