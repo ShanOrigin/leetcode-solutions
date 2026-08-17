@@ -1,47 +1,48 @@
 class Solution {
 public:
 
-    int expandFromCenter(string s, int left, int right) {
+    int expand(string& s, int left, int right, int& start) {
 
-        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+        int size = s.size();
+
+        while (left >= 0 && right < size && s[left] == s[right]) {
             left--;
             right++;
         }
 
-        return right - left - 1;
+        int length = right - left - 1;
+
+        start = left + 1;
+
+        return length;
     }
 
     string longestPalindrome(string s) {
 
-        int stringLength = s.length();
+        int size = s.size();
 
-        int longestStart = 0;
-        int longestLength = 1;
+        int start = 0;
+        int longest = 1;
 
-        for (int center = 0; center < stringLength; center++) {
+        for (int i = 0; i < size; i++) {
 
-            // Odd-length palindrome
-            int oddLength = expandFromCenter(s, center, center);
+            int oddStart;
+            int odd = expand(s, i, i, oddStart);
 
-            // Even-length palindrome
-            int evenLength = expandFromCenter(s, center, center + 1);
-
-            int currentLength;
-
-            if (oddLength > evenLength) {
-                currentLength = oddLength;
-            } else {
-                currentLength = evenLength;
+            if (odd > longest) {
+                longest = odd;
+                start = oddStart;
             }
 
-            if (currentLength > longestLength) {
+            int evenStart;
+            int even = expand(s, i, i + 1, evenStart);
 
-                longestLength = currentLength;
-
-                longestStart = center - (currentLength - 1) / 2;
+            if (even > longest) {
+                longest = even;
+                start = evenStart;
             }
         }
 
-        return s.substr(longestStart, longestLength);
+        return s.substr(start, longest);
     }
 };
